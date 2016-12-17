@@ -1,12 +1,12 @@
 # Top 10 - Fast Tracker
 
-__Requires:__ 4.1
+__Requires:__ 4.1 and Top 10 v2.x
 
 __Tested up to:__ 4.7
 
 __License:__ [GPL-2.0+](http://www.gnu.org/licenses/gpl-2.0.html)
 
-__Plugin page:__ [Top 10](https://webberzone.com/downloads/top-10-fast-tracker/)
+__Plugin page:__ [Top 10 - Fast Tracker](https://webberzone.com/downloads/top-10-fast-tracker/)
 
 Track daily and total visits on your blog posts. Display the count as well as popular and trending posts.
 
