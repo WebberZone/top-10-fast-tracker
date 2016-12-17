@@ -28,10 +28,10 @@ Older versions of [Top 10](https://webberzone.com/plugins/top-10/) included a hi
 
 ## Frequently Asked Questions
 
-If you're looking for support [create an issue in the Github repository](https://github.com/WebberZone/top-10-fast-tracker/issues). I also provide [premium *paid* support via email](https://webberzone.com/support/).
+If you're looking for support for this addon, [create an issue in the Github repository](https://github.com/WebberZone/top-10-fast-tracker/issues). I also provide [premium *paid* support via email](https://webberzone.com/support/).
 
 
 ## About this repository
 
-This GitHub repository always holds the latest development version of the plugin. In addition to stable releases, latest beta versions are made available under [releases](https://github.com/WebberZone/top-10/releases).
+This GitHub repository always holds the latest development version of the plugin. In addition to stable releases, latest beta versions are made available under [releases](https://github.com/WebberZone/top-10-fast-tracker/releases).
 
