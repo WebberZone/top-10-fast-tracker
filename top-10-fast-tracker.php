@@ -33,7 +33,7 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Holds the filesystem directory path (with trailing slash) for Top 10
  *
- * @since 2.3.0
+ * @since 1.0.0
  *
  * @var string Plugin folder path
  */
@@ -44,7 +44,7 @@ if ( ! defined( 'TPTN_FT_PLUGIN_DIR' ) ) {
 /**
  * Holds the filesystem directory path (with trailing slash) for Top 10
  *
- * @since 2.3.0
+ * @since 1.0.0
  *
  * @var string Plugin folder URL
  */
@@ -57,7 +57,7 @@ if ( ! defined( 'TPTN_FT_PLUGIN_URL' ) ) {
  *
  * @since 1.0.0
  *
- * @param string $home_url
+ * @param string $home_url URL of Top script.
  * @return string
  */
 function tptnft_tracker( $home_url ) {
