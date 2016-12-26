@@ -66,3 +66,13 @@ function tptnft_tracker( $home_url ) {
 	return TPTN_FT_PLUGIN_URL . 'includes/fast-tracker.js.php';
 }
 add_filter( 'tptn_add_counter_script_url', 'tptnft_tracker' );
+
+
+/*
+ ----------------------------------------------------------------------------*
+ * Include files
+ *---------------------------------------------------------------------------*
+ */
+
+require_once( TPTN_FT_PLUGIN_DIR . 'includes/hooks.php' );
+
