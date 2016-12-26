@@ -63,6 +63,20 @@ if ( ! defined( 'TPTN_FT_PLUGIN_URL' ) ) {
 function tptnft_tracker( $home_url ) {
 	global $tptn_settings;
 
-	return TPTN_FT_PLUGIN_URL . 'includes/fast-tracker.js.php';
+	if ( 'fast_tracker' === $tptn_settings['tracker_type'] ) {
+		return TPTN_FT_PLUGIN_URL . 'includes/fast-tracker.js.php';
+	} else {
+		return $home_url;
+	}
 }
 add_filter( 'tptn_add_counter_script_url', 'tptnft_tracker' );
+
+
+/*
+ ----------------------------------------------------------------------------*
+ * Include files
+ *---------------------------------------------------------------------------*
+ */
+
+require_once( TPTN_FT_PLUGIN_DIR . 'includes/hooks.php' );
+
