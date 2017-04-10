@@ -18,7 +18,7 @@
  */
 if ( ! defined( 'WZ_STORE_URL' ) ) {
 	// define( 'WZ_STORE_URL', 'https://webberzone.com' );
-	define( 'WZ_STORE_URL', 'http://localhost/wpmu' );
+	define( 'WZ_STORE_URL', 'https://ajaydsouza.org' );
 }
 
 /**
