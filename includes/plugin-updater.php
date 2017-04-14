@@ -33,7 +33,7 @@ if ( ! defined( 'TPTN_FT_PLUGIN_NAME' ) ) {
 }
 
 // the name of the settings page for the license input to be displayed
-define( 'TPTN_FT_PLUGIN_LICENSE_PAGE', 'tptn_options' );
+define( 'TPTN_FT_PLUGIN_LICENSE_PAGE', 'tptnft_license_page' );
 
 if ( ! class_exists( 'EDD_SL_Plugin_Updater' ) ) {
 	include( dirname( __FILE__ ) . '/EDD_SL_Plugin_Updater.php' );
@@ -232,7 +232,7 @@ function tptnft_activate_license() {
 
 		// Check if anything passed on a message constituting a failure
 		if ( ! empty( $message ) ) {
-			$base_url = admin_url( 'plugins.php?page=' . TPTN_FT_PLUGIN_LICENSE_PAGE );
+			$base_url = admin_url( 'admin.php?page=' . TPTN_FT_PLUGIN_LICENSE_PAGE );
 			$redirect = add_query_arg( array( 'sl_activation' => 'false', 'message' => urlencode( $message ) ), $base_url );
 
 			wp_redirect( $redirect );
@@ -241,7 +241,7 @@ function tptnft_activate_license() {
 
 		// $license_data->license will be either "valid" or "invalid"
 		update_option( 'tptnft_license_status', $license_data->license );
-		wp_redirect( admin_url( 'plugins.php?page=' . TPTN_FT_PLUGIN_LICENSE_PAGE ) );
+		wp_redirect( admin_url( 'admin.php?page=' . TPTN_FT_PLUGIN_LICENSE_PAGE ) );
 		exit();
 	}
 }
@@ -288,7 +288,7 @@ function tptnft_deactivate_license() {
 				$message = __( 'An error occurred, please try again.' );
 			}
 
-			$base_url = admin_url( 'plugins.php?page=' . TPTN_FT_PLUGIN_LICENSE_PAGE );
+			$base_url = admin_url( 'admin.php?page=' . TPTN_FT_PLUGIN_LICENSE_PAGE );
 			$redirect = add_query_arg( array( 'sl_activation' => 'false', 'message' => urlencode( $message ) ), $base_url );
 
 			wp_redirect( $redirect );
@@ -303,7 +303,7 @@ function tptnft_deactivate_license() {
 			delete_option( 'tptnft_license_status' );
 		}
 
-		wp_redirect( admin_url( 'plugins.php?page=' . TPTN_FT_PLUGIN_LICENSE_PAGE ) );
+		wp_redirect( admin_url( 'admin.php?page=' . TPTN_FT_PLUGIN_LICENSE_PAGE ) );
 		exit();
 
 	}
