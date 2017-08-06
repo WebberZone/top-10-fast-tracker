@@ -11,16 +11,16 @@
  * @copyright 2016-2017 WebberZone
  *
  * @wordpress-plugin
- * Plugin Name:	Top 10 - Fast Tracker
- * Plugin URI:	https://webberzone.com/downloads/top-10-fast-tracker/
- * Description:	Addon for Top 10 WordPress plugin to use a high speed tracker
- * Version: 	0.9.0
- * Author: 		Ajay D'Souza
- * Author URI: 	https://webberzone.com
- * License: 	GPL-2.0+
- * License URI:	http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:	top-10-fast-tracker
- * Domain Path:	/languages
+ * Plugin Name: Top 10 - Fast Tracker
+ * Plugin URI:  https://webberzone.com/downloads/top-10-fast-tracker/
+ * Description: Addon for Top 10 WordPress plugin to use a high speed tracker
+ * Version:     0.9.0
+ * Author:      Ajay D'Souza
+ * Author URI:  https://webberzone.com
+ * License:     GPL-2.0+
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
+ * Text Domain: top-10-fast-tracker
+ * Domain Path: /languages
  * GitHub Plugin URI: https://github.com/WebberZone/top-10-fast-tracker/
  */
 

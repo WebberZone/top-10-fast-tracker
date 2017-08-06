@@ -50,12 +50,13 @@ function tptnft_plugin_updater() {
 	$license_key = trim( get_option( 'tptnft_license_key' ) );
 
 	// setup the updater
-	$edd_updater = new EDD_SL_Plugin_Updater( WZ_STORE_URL, TPTN_FT_PLUGIN_FILE, array(
+	$edd_updater = new EDD_SL_Plugin_Updater(
+		WZ_STORE_URL, TPTN_FT_PLUGIN_FILE, array(
 			'version'   => '0.9.0',             // current version number
 			'license'   => $license_key,        // license key (used get_option above to retrieve from DB)
 			'item_name' => TPTN_FT_PLUGIN_NAME, // name of this plugin
 			'author'    => 'WebberZone',        // author of this plugin
-			'beta'		=> false
+			'beta'      => false,
 		)
 	);
 
@@ -110,9 +111,11 @@ function tptnft_license_page() {
 									<span style="color:green;"><?php _e( 'active' ); ?></span>
 									<?php wp_nonce_field( 'tptnft_nonce', 'tptnft_nonce' ); ?>
 									<input type="submit" class="button-secondary" name="edd_license_deactivate" value="<?php _e( 'Deactivate License' ); ?>"/>
-								<?php } else {
-									wp_nonce_field( 'tptnft_nonce', 'tptnft_nonce' ); ?>
-									<input type="submit" class="button-secondary" name="edd_license_activate" value="<?php _e( 'Activate License' ); ?>"/>
+								<?php
+} else {
+	wp_nonce_field( 'tptnft_nonce', 'tptnft_nonce' );
+	?>
+	<input type="submit" class="button-secondary" name="edd_license_activate" value="<?php _e( 'Activate License' ); ?>"/>
 								<?php } ?>
 							</td>
 						</tr>
@@ -154,7 +157,7 @@ function tptnft_activate_license() {
 	if ( isset( $_POST['edd_license_activate'] ) ) {
 
 		// run a quick security check
-	 	if ( ! check_admin_referer( 'tptnft_nonce', 'tptnft_nonce' ) ) {
+		if ( ! check_admin_referer( 'tptnft_nonce', 'tptnft_nonce' ) ) {
 			return; // get out if we didn't click the Activate button
 		}
 
@@ -170,7 +173,13 @@ function tptnft_activate_license() {
 		);
 
 		// Call the custom API.
-		$response = wp_remote_post( WZ_STORE_URL, array( 'timeout' => 15, 'sslverify' => false, 'body' => $api_params ) );
+		$response = wp_remote_post(
+			WZ_STORE_URL, array(
+				'timeout' => 15,
+				'sslverify' => false,
+				'body' => $api_params,
+			)
+		);
 
 		// make sure the response came back okay
 		if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
@@ -188,42 +197,35 @@ function tptnft_activate_license() {
 
 				switch ( $license_data->error ) {
 
-					case 'expired' :
-
+					case 'expired':
 						$message = sprintf(
 							__( 'Your license key expired on %s.' ),
 							date_i18n( get_option( 'date_format' ), strtotime( $license_data->expires, current_time( 'timestamp' ) ) )
 						);
 						break;
 
-					case 'revoked' :
-
+					case 'revoked':
 						$message = __( 'Your license key has been disabled.' );
 						break;
 
-					case 'missing' :
-
+					case 'missing':
 						$message = __( 'Invalid license.' );
 						break;
 
-					case 'invalid' :
-					case 'site_inactive' :
-
+					case 'invalid':
+					case 'site_inactive':
 						$message = __( 'Your license is not active for this URL.' );
 						break;
 
-					case 'item_name_mismatch' :
-
+					case 'item_name_mismatch':
 						$message = sprintf( __( 'This appears to be an invalid license key for %s.' ), TPTN_FT_PLUGIN_NAME );
 						break;
 
 					case 'no_activations_left':
-
 						$message = __( 'Your license key has reached its activation limit.' );
 						break;
 
-					default :
-
+					default:
 						$message = __( 'An error occurred, please try again.' );
 						break;
 				}
@@ -233,7 +235,12 @@ function tptnft_activate_license() {
 		// Check if anything passed on a message constituting a failure
 		if ( ! empty( $message ) ) {
 			$base_url = admin_url( 'admin.php?page=' . TPTN_FT_PLUGIN_LICENSE_PAGE );
-			$redirect = add_query_arg( array( 'sl_activation' => 'false', 'message' => urlencode( $message ) ), $base_url );
+			$redirect = add_query_arg(
+				array(
+					'sl_activation' => 'false',
+					'message' => urlencode( $message ),
+				), $base_url
+			);
 
 			wp_redirect( $redirect );
 			exit();
@@ -261,7 +268,7 @@ function tptnft_deactivate_license() {
 	if ( isset( $_POST['edd_license_deactivate'] ) ) {
 
 		// run a quick security check
-	 	if ( ! check_admin_referer( 'tptnft_nonce', 'tptnft_nonce' ) ) {
+		if ( ! check_admin_referer( 'tptnft_nonce', 'tptnft_nonce' ) ) {
 			return; // get out if we didn't click the Activate button
 		}
 
@@ -277,7 +284,13 @@ function tptnft_deactivate_license() {
 		);
 
 		// Call the custom API.
-		$response = wp_remote_post( WZ_STORE_URL, array( 'timeout' => 15, 'sslverify' => false, 'body' => $api_params ) );
+		$response = wp_remote_post(
+			WZ_STORE_URL, array(
+				'timeout' => 15,
+				'sslverify' => false,
+				'body' => $api_params,
+			)
+		);
 
 		// make sure the response came back okay
 		if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
@@ -289,7 +302,12 @@ function tptnft_deactivate_license() {
 			}
 
 			$base_url = admin_url( 'admin.php?page=' . TPTN_FT_PLUGIN_LICENSE_PAGE );
-			$redirect = add_query_arg( array( 'sl_activation' => 'false', 'message' => urlencode( $message ) ), $base_url );
+			$redirect = add_query_arg(
+				array(
+					'sl_activation' => 'false',
+					'message' => urlencode( $message ),
+				), $base_url
+			);
 
 			wp_redirect( $redirect );
 			exit();
@@ -335,7 +353,13 @@ function tptnft_check_license() {
 	);
 
 	// Call the custom API.
-	$response = wp_remote_post( WZ_STORE_URL, array( 'timeout' => 15, 'sslverify' => false, 'body' => $api_params ) );
+	$response = wp_remote_post(
+		WZ_STORE_URL, array(
+			'timeout' => 15,
+			'sslverify' => false,
+			'body' => $api_params,
+		)
+	);
 
 	if ( is_wp_error( $response ) ) {
 		return false;
