@@ -36,7 +36,7 @@ if ( ! defined( 'TPTN_FT_PLUGIN_NAME' ) ) {
 define( 'TPTN_FT_PLUGIN_LICENSE_PAGE', 'tptnft_license_page' );
 
 if ( ! class_exists( 'EDD_SL_Plugin_Updater' ) ) {
-	include( dirname( __FILE__ ) . '/EDD_SL_Plugin_Updater.php' );
+	include dirname( __FILE__ ) . '/EDD_SL_Plugin_Updater.php';
 }
 
 /**
@@ -51,7 +51,9 @@ function tptnft_plugin_updater() {
 
 	// setup the updater
 	$edd_updater = new EDD_SL_Plugin_Updater(
-		WZ_STORE_URL, TPTN_FT_PLUGIN_FILE, array(
+		WZ_STORE_URL,
+		TPTN_FT_PLUGIN_FILE,
+		array(
 			'version'   => '0.9.0',             // current version number
 			'license'   => $license_key,        // license key (used get_option above to retrieve from DB)
 			'item_name' => TPTN_FT_PLUGIN_NAME, // name of this plugin
@@ -111,7 +113,7 @@ function tptnft_license_page() {
 									<span style="color:green;"><?php _e( 'active' ); ?></span>
 									<?php wp_nonce_field( 'tptnft_nonce', 'tptnft_nonce' ); ?>
 									<input type="submit" class="button-secondary" name="edd_license_deactivate" value="<?php _e( 'Deactivate License' ); ?>"/>
-								<?php
+									<?php
 } else {
 	wp_nonce_field( 'tptnft_nonce', 'tptnft_nonce' );
 	?>
@@ -174,10 +176,11 @@ function tptnft_activate_license() {
 
 		// Call the custom API.
 		$response = wp_remote_post(
-			WZ_STORE_URL, array(
-				'timeout' => 15,
+			WZ_STORE_URL,
+			array(
+				'timeout'   => 15,
 				'sslverify' => false,
-				'body' => $api_params,
+				'body'      => $api_params,
 			)
 		);
 
@@ -238,8 +241,9 @@ function tptnft_activate_license() {
 			$redirect = add_query_arg(
 				array(
 					'sl_activation' => 'false',
-					'message' => urlencode( $message ),
-				), $base_url
+					'message'       => urlencode( $message ),
+				),
+				$base_url
 			);
 
 			wp_redirect( $redirect );
@@ -285,10 +289,11 @@ function tptnft_deactivate_license() {
 
 		// Call the custom API.
 		$response = wp_remote_post(
-			WZ_STORE_URL, array(
-				'timeout' => 15,
+			WZ_STORE_URL,
+			array(
+				'timeout'   => 15,
 				'sslverify' => false,
-				'body' => $api_params,
+				'body'      => $api_params,
 			)
 		);
 
@@ -305,8 +310,9 @@ function tptnft_deactivate_license() {
 			$redirect = add_query_arg(
 				array(
 					'sl_activation' => 'false',
-					'message' => urlencode( $message ),
-				), $base_url
+					'message'       => urlencode( $message ),
+				),
+				$base_url
 			);
 
 			wp_redirect( $redirect );
@@ -347,17 +353,18 @@ function tptnft_check_license() {
 
 	$api_params = array(
 		'edd_action' => 'check_license',
-		'license' => $license,
-		'item_name' => urlencode( TPTN_FT_PLUGIN_NAME ),
-		'url'       => home_url(),
+		'license'    => $license,
+		'item_name'  => urlencode( TPTN_FT_PLUGIN_NAME ),
+		'url'        => home_url(),
 	);
 
 	// Call the custom API.
 	$response = wp_remote_post(
-		WZ_STORE_URL, array(
-			'timeout' => 15,
+		WZ_STORE_URL,
+		array(
+			'timeout'   => 15,
 			'sslverify' => false,
-			'body' => $api_params,
+			'body'      => $api_params,
 		)
 	);
 

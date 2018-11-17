@@ -90,9 +90,9 @@ add_filter( 'tptn_add_counter_script_url', 'tptnft_tracker' );
  *---------------------------------------------------------------------------*
  */
 
-require_once( TPTN_FT_PLUGIN_DIR . 'includes/hooks.php' );
+require_once TPTN_FT_PLUGIN_DIR . 'includes/hooks.php';
 
 if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 
-	require_once( TPTN_FT_PLUGIN_DIR . 'includes/plugin-updater.php' );
+	require_once TPTN_FT_PLUGIN_DIR . 'includes/plugin-updater.php';
 }
