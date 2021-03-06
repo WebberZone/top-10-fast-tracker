@@ -70,12 +70,12 @@ script:
     # If we've set the $WP_TRAVISCI variable to run PHPCS, do that instead
     # of running PHPUnit.
     if [[ "$WP_TRAVISCI" == "phpcs" ]]; then
-      ./vendor/bin/phpcs
+      ./vendor/bin/phpcs -p -v -s --standard=phpcs.ruleset.xml $(find . -name '*.php')
 
     else
       # Execute the test suite
       ./vendor/bin/phpunit
 
       # Optionally run the tests again in a multisite environment
-      #WP_MULTISITE=1 ./vendor/bin/phpunit
+      WP_MULTISITE=1 ./vendor/bin/phpunit
     fi
