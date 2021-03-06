@@ -114,9 +114,9 @@ function tptnft_license_page() {
 									<?php wp_nonce_field( 'tptnft_nonce', 'tptnft_nonce' ); ?>
 									<input type="submit" class="button-secondary" name="edd_license_deactivate" value="<?php _e( 'Deactivate License' ); ?>"/>
 									<?php
-} else {
-	wp_nonce_field( 'tptnft_nonce', 'tptnft_nonce' );
-	?>
+								} else {
+									wp_nonce_field( 'tptnft_nonce', 'tptnft_nonce' );
+									?>
 	<input type="submit" class="button-secondary" name="edd_license_activate" value="<?php _e( 'Activate License' ); ?>"/>
 								<?php } ?>
 							</td>

@@ -41,9 +41,9 @@ function tptn_inc_count() {
 	$top_ten_daily = $wpdb->base_prefix . 'top_ten_daily';
 	$str           = '';
 
-	$id               = intval( $_POST['top_ten_id'] );
-	$blog_id          = intval( $_POST['top_ten_blog_id'] );
-	$activate_counter = intval( $_POST['activate_counter'] );
+	$id               = isset( $_POST['top_ten_id'] ) ? intval( $_POST['top_ten_id'] ) : 0;
+	$blog_id          = isset( $_POST['top_ten_blog_id'] ) ? intval( $_POST['top_ten_blog_id'] ) : 0;
+	$activate_counter = isset( $_POST['activate_counter'] ) ? intval( $_POST['activate_counter'] ) : 0;
 
 	if ( $id > 0 ) {
 
@@ -56,7 +56,7 @@ function tptn_inc_count() {
 
 		if ( ( 10 === $activate_counter ) || ( 11 === $activate_counter ) ) {
 
-			$current_date = gmdate( 'Y-m-d H', current_time( 'timestamp', 1 ) );
+			$current_date = gmdate( 'Y-m-d H', time() );
 			$ttd          = $wpdb->query( $wpdb->prepare( "INSERT INTO {$top_ten_daily} (postnumber, cntaccess, dp_date, blog_id) VALUES('%d', '1', '%s', '%d' ) ON DUPLICATE KEY UPDATE cntaccess= cntaccess+1 ", $id, $current_date, $blog_id ) );
 			$str         .= ( false === $ttd ) ? ' ttde' : ' ttd' . $ttd;
 
