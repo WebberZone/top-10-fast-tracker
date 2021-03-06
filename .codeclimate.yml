@@ -46,4 +46,5 @@ ratings:
   - "**.js"
 exclude_paths:
 - tests/
-- admin/wick/
+- bin/
+- vendor/
