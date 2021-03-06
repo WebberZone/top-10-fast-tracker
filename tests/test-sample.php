@@ -2,7 +2,7 @@
 /**
  * Class SampleTest
  *
- * @package Top_Ten_Fast_Tracker
+ * @package Top_10_Fast_Tracker
  */
 
 /**
@@ -13,7 +13,7 @@ class SampleTest extends WP_UnitTestCase {
 	/**
 	 * A single example test.
 	 */
-	function test_sample() {
+	public function test_sample() {
 		// Replace this with some actual testing code.
 		$this->assertTrue( true );
 	}
