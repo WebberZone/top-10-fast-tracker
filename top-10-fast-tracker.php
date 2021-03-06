@@ -11,16 +11,16 @@
  * @copyright 2016-2017 WebberZone
  *
  * @wordpress-plugin
- * Plugin Name:	Top 10 - Fast Tracker
- * Plugin URI:	https://webberzone.com/downloads/top-10-fast-tracker/
- * Description:	Addon for Top 10 WordPress plugin to use a high speed tracker
- * Version: 	1.0.0-beta1
- * Author: 		Ajay D'Souza
- * Author URI: 	https://webberzone.com
- * License: 	GPL-2.0+
- * License URI:	http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:	top-10-fast-tracker
- * Domain Path:	/languages
+ * Plugin Name: Top 10 - Fast Tracker
+ * Plugin URI:  https://webberzone.com/downloads/top-10-fast-tracker/
+ * Description: Addon for Top 10 WordPress plugin to use a high speed tracker
+ * Version:     1.0.0-beta1
+ * Author:      Ajay D'Souza
+ * Author URI:  https://webberzone.com
+ * License:     GPL-2.0+
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
+ * Text Domain: top-10-fast-tracker
+ * Domain Path: /languages
  * GitHub Plugin URI: https://github.com/WebberZone/top-10-fast-tracker/
  */
 
@@ -78,5 +78,5 @@ add_filter( 'tptn_add_counter_script_url', 'tptnft_tracker' );
  *---------------------------------------------------------------------------*
  */
 
-require_once( TPTN_FT_PLUGIN_DIR . 'includes/hooks.php' );
+require_once TPTN_FT_PLUGIN_DIR . 'includes/hooks.php';
 

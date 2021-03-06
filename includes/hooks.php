@@ -20,8 +20,8 @@
 function tptnft_add_tracker( $trackers ) {
 
 	$trackers[] = array(
-		'id' => 'fast_tracker',
-		'name' => __( 'Fast tracker', 'top-10' ),
+		'id'          => 'fast_tracker',
+		'name'        => __( 'Fast tracker', 'top-10' ),
 		'description' => __( 'Uses an external JavaScript file', 'top-10' ),
 	);
 
