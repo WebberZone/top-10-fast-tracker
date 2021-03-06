@@ -1,81 +1,76 @@
 language: php
+dist: xenial
 
 services:
-  - mysql
+    - mysql
+
+notifications:
+  email:
+    on_success: never
+    on_failure: change
 
 cache:
   directories:
     - $HOME/.composer/cache
 
-# Explicitly test against supported versions of PHP
-#
-# Reference: https://www.php.net/supported-versions.php
 php:
-  - 7.4snapshot
+  - 7.4
   - 7.3
   - 7.2
+  - 7.1
+  - 7.0
 
-# Test against the latest version of WordPress and one version back.
 env:
   - WP_VERSION=latest
-  - WP_VERSION=5.2
+  - WP_VERSION=5.3
 
-# Customize the build matrix.
 matrix:
   fast_finish: true
   include:
-    # Run PHP_CodeSniffer
-    - name: Coding standards
-      php: 7.3
-      env: WP_VERSION=latest WP_TRAVISCI=phpcs
-
-    # Canary for our oldest-supported version
-    - name: Legacy
-      php: 5.6
-      env: WP_VERSION=4.9
-      dist: trusty
-
-    # Nightly versions of PHP and WordPress.
-    - name: Bleeding edge
-      php: 7.4snapshot
+    - name: Coding Standards
+      php: 7.4
+      env: WP_VERSION=latest RUN_PHPCS=1
+    - name: Code Coverage
+      php: 7.1
+      env: WP_VERSION=latest RUN_CODE_COVERAGE=1
+    - name: Bleeding Edge
+      php: nightly
       env: WP_VERSION=trunk
-
-  # Jobs that are permitted to fail without breaking the build
   allow_failures:
-    - name: Bleeding edge
-    - name: Coding standards
+    - name: Code Coverage
+    - name: Bleeding Edge
 
 before_install:
-  - export PATH="$HOME/.composer/vendor/bin:$PATH"
-
-  # Unless we need XDebug, disable it for improved performance.
-  - phpenv config-rm xdebug.ini || return 0
+  - phpenv config-rm xdebug.ini || true
 
 install:
-  # Install our Composer dependencies
-  - composer install --prefer-dist --no-interaction
-
-  # Install an older version of PHPUnit if we're still running PHP 5.6.
   - |
-    if [[ "$TRAVIS_PHP_VERSION" == "5.6" ]]; then
-      wget -O ./vendor/bin/phpunit https://phar.phpunit.de/phpunit-5.phar
-      chmod +x ./vendor/bin/phpunit
+    if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.0" ]]; then
+      composer update --prefer-source --prefer-lowest --no-interaction --no-ansi
+    else
+      composer install --prefer-source --no-interaction --no-ansi
     fi
-
-  # Install the WordPress core test suite
-  - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+  - bash vendor/bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+  - |
+    if [[ ${RUN_CODE_COVERAGE} ]]; then
+      wget https://github.com/php-coveralls/php-coveralls/releases/download/v1.0.0/coveralls.phar
+      chmod +x coveralls.phar
+      mkdir -p build/logs
+    fi
 
 script:
   - |
-    # If we've set the $WP_TRAVISCI variable to run PHPCS, do that instead
-    # of running PHPUnit.
-    if [[ "$WP_TRAVISCI" == "phpcs" ]]; then
-      ./vendor/bin/phpcs -p -v -s --standard=phpcs.ruleset.xml $(find . -name '*.php')
-
+    if [[ ${RUN_PHPCS} ]]; then
+      ./vendor/bin/phpcs
+    elif [[ ${RUN_CODE_COVERAGE} ]]; then
+      phpdbg -qrr ./vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover=build/logs/clover.xml
     else
-      # Execute the test suite
-      ./vendor/bin/phpunit
-
-      # Optionally run the tests again in a multisite environment
+      WP_MULTISITE=0 ./vendor/bin/phpunit
       WP_MULTISITE=1 ./vendor/bin/phpunit
+    fi
+
+after_success:
+  - |
+    if [[ ${RUN_CODE_COVERAGE} ]]; then
+      travis_retry php coveralls.phar
     fi
