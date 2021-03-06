@@ -33,6 +33,7 @@ matrix:
     - name: Legacy
       php: 5.6
       env: WP_VERSION=4.9
+      dist: trusty
 
     # Nightly versions of PHP and WordPress.
     - name: Bleeding edge
