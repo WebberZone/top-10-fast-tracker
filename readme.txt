@@ -3,8 +3,8 @@ Tags: popular posts, top 10, tracker
 Contributors: webberzone, Ajay
 Donate link: https://ajaydsouza.com/donate/
 Stable tag: trunk
-Requires at least: 4.1
-Tested up to: 4.7
+Requires at least: 5.4
+Tested up to: 5.9
 License: GPLv2 or later
 
 Addon for Top 10 that incorporates a high performance tracker.

@@ -3,10 +3,6 @@
  * Update counts to database.
  *
  * @package   Top_Ten_Fast_Tracker
- * @author    Ajay D'Souza <me@ajaydsouza.com>
- * @license   GPL-2.0+
- * @link      https://webberzone.com
- * @copyright 2016-2017 WebberZone
  */
 
 Header( 'content-type: application/x-javascript' );
@@ -41,15 +37,15 @@ function tptn_inc_count() {
 	$top_ten_daily = $wpdb->base_prefix . 'top_ten_daily';
 	$str           = '';
 
-	$id               = isset( $_POST['top_ten_id'] ) ? intval( $_POST['top_ten_id'] ) : 0;
-	$blog_id          = isset( $_POST['top_ten_blog_id'] ) ? intval( $_POST['top_ten_blog_id'] ) : 0;
-	$activate_counter = isset( $_POST['activate_counter'] ) ? intval( $_POST['activate_counter'] ) : 0;
+	$id               = isset( $_POST['top_ten_id'] ) ? intval( $_POST['top_ten_id'] ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+	$blog_id          = isset( $_POST['top_ten_blog_id'] ) ? intval( $_POST['top_ten_blog_id'] ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+	$activate_counter = isset( $_POST['activate_counter'] ) ? intval( $_POST['activate_counter'] ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
 	if ( $id > 0 ) {
 
 		if ( ( 1 === $activate_counter ) || ( 11 === $activate_counter ) ) {
 
-			$tt   = $wpdb->query( $wpdb->prepare( "INSERT INTO {$table_name} (postnumber, cntaccess, blog_id) VALUES('%d', '1', '%d') ON DUPLICATE KEY UPDATE cntaccess= cntaccess+1 ", $id, $blog_id ) );
+			$tt   = $wpdb->query( $wpdb->prepare( "INSERT INTO {$table_name} (postnumber, cntaccess, blog_id) VALUES(%d, '1', %d) ON DUPLICATE KEY UPDATE cntaccess= cntaccess+1 ", $id, $blog_id ) ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared,WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
 			$str .= ( false === $tt ) ? 'tte' : 'tt' . $tt;
 
 		}
@@ -57,12 +53,12 @@ function tptn_inc_count() {
 		if ( ( 10 === $activate_counter ) || ( 11 === $activate_counter ) ) {
 
 			$current_date = gmdate( 'Y-m-d H', time() );
-			$ttd          = $wpdb->query( $wpdb->prepare( "INSERT INTO {$top_ten_daily} (postnumber, cntaccess, dp_date, blog_id) VALUES('%d', '1', '%s', '%d' ) ON DUPLICATE KEY UPDATE cntaccess= cntaccess+1 ", $id, $current_date, $blog_id ) );
+			$ttd          = $wpdb->query( $wpdb->prepare( "INSERT INTO {$top_ten_daily} (postnumber, cntaccess, dp_date, blog_id) VALUES(%d, '1', %s, %d ) ON DUPLICATE KEY UPDATE cntaccess= cntaccess+1 ", $id, $current_date, $blog_id ) ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared,WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
 			$str         .= ( false === $ttd ) ? ' ttde' : ' ttd' . $ttd;
 
 		}
 	}
-	echo '<!-- ' . $str . ' -->';
+	echo '<!-- ' . $str . ' -->'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 }
 
 // Ajax Increment Counter.

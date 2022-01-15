@@ -3,10 +3,6 @@
  * Functions that hook into Top 10.
  *
  * @package   Top_Ten_Fast_Tracker
- * @author    Ajay D'Souza <me@ajaydsouza.com>
- * @license   GPL-2.0+
- * @link      https://webberzone.com
- * @copyright 2016-2017 WebberZone
  */
 
 /**
@@ -29,4 +25,3 @@ function tptnft_add_tracker( $trackers ) {
 
 }
 add_filter( 'tptn_get_tracker_types', 'tptnft_add_tracker' );
-

@@ -1,0 +1,21 @@
+{
+    "name": "webberzone/top-10-fast-tracker",
+    "description": "Track daily and total visits on your blog posts. Display the count as well as popular and trending posts.",
+    "type": "wordpress-plugin",
+    "keywords": [
+        "top 10",
+        "popular posts",
+        "tracker"
+    ],
+    "license": "gpl-2.0-or-later",
+    "authors": [
+        {
+            "name": "WebberZone",
+            "email": "plugins@webberzone.com",
+            "role": "Developer"
+        }
+    ],
+    "requires": {
+        "php": ">=7.1"
+    }
+}
