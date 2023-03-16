@@ -8,13 +8,13 @@
  * @author    Ajay D'Souza
  * @license   GPL-2.0+
  * @link      https://webberzone.com
- * @copyright 2016-2022 WebberZone
+ * @copyright 2016-2023 WebberZone
  *
  * @wordpress-plugin
  * Plugin Name: Top 10 - Fast Tracker
  * Plugin URI:  https://webberzone.com/downloads/top-10-fast-tracker/
  * Description: Addon for Top 10 WordPress plugin to use a high speed tracker
- * Version:     1.1.0-beta1
+ * Version:     1.1.0-beta2
  * Author:      Ajay D'Souza
  * Author URI:  https://webberzone.com
  * License:     GPL-2.0+
