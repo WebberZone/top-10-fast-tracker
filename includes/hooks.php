@@ -22,6 +22,5 @@ function tptnft_add_tracker( $trackers ) {
 	);
 
 	return $trackers;
-
 }
 add_filter( 'tptn_get_tracker_types', 'tptnft_add_tracker' );

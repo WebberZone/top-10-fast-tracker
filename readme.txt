@@ -2,17 +2,19 @@
 Tags: popular posts, top 10, tracker
 Contributors: webberzone, Ajay
 Donate link: https://ajaydsouza.com/donate/
-Stable tag: trunk
-Requires at least: 5.4
-Tested up to: 5.9
+Stable tag: 1.1.0
+Requires at least: 5.9
+Tested up to: 6.4
+Requires PHP: 7.4
 License: GPLv2 or later
 
 Addon for Top 10 that incorporates a high performance tracker.
 
 == Description ==
 
-Older versions of [Top 10](https://webberzone.com/plugins/top-10/) included a high performance tracker that worked with an external excel file loading a minimal WordPress environment. This free addon will allow you to bring back this tracker and significantly speed up Top 10.
+Older versions of [Top 10](https://webberzone.com/plugins/top-10/) included a high performance tracker that worked with an external JavaScript file loading a minimal WordPress environment. This free addon will allow you to bring back this tracker and significantly speed up Top 10.
 
+This plugin is an addon to the [Top 10](https://webberzone.com/plugins/top-10/) plugin. You must have Top 10 v3.x installed for this plugin to work.
 
 = Contribute =
 
@@ -40,6 +42,12 @@ If you're looking for support [create an issue in the Github repository](https:/
 
 
 == Changelog ==
+
+= 1.1.0 =
+
+* Removed: EDD Plugin Updater
+* Fixed: Multiple WordPress Coding Standard issues
+* Fixed: PHP 8.3 compatibility
 
 = 1.0.0 =
 
